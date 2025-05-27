@@ -1,31 +1,24 @@
-import { useContext, useEffect } from "react"
-import Card from "../components/Card"
-import { ArticleContext, type ArticleProps } from "../context/articleContext/ArticleContext"
+import Input, { type Field } from '../components/Input'
+
+const fields: Field[] = [
+    { name: "firstName", label: "FirstName", type: "text" },
+    { name: "lastName", label: "LastName", type: "text" },
+    { name: "email", label: "Email", type: "email" },
+    { name: "password", label: "Password", type: "password" },
+    { name: "address.city", label: "City", type: "text" },
+    { name: "address", label: "Municipality", type: "text" },
+    {name: "address.street", label: "Street", type: "text"}
+]
 
 const Home = () => {
-    const context = useContext(ArticleContext)
-    
-    useEffect(() => {
-        if (context && context.cardItems.length > 0) {
-            context.cardItems.forEach((item: ArticleProps) => context.getArticle(item));
-        }
-    }, [context])
-
-    if (!context) {
-        return <div>Loading...</div>
+    const handleSubmit = async (data: Record<string, string>) => {
+        console.log(data)
     }
-
-    const { cardItems, getArticle, isArticleLoading, error } = context;
-    
-    if (error) {
-        return <div>Error: {error}</div>
-    }
-    
-    return (
-        <div>
-            {cardItems && <Card cardItems={cardItems} />}
-        </div>
-    )
+  return (
+    <div>
+      <Input fields={fields} handleSubmit={handleSubmit} initialData={{}} submitText="Submit" loadingText="Loading..." error={null}/>
+    </div>
+  )
 }
 
 export default Home
