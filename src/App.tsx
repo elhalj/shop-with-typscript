@@ -1,7 +1,8 @@
 import { useContext } from "react"
 import { ThemeContext } from "./context/themeContext/ThemeContext"
-import { Route, Routes } from "react-router-dom"
+import { Link, Route, Routes } from "react-router-dom"
 import Home from "./pages/Home"
+import Signup from "./pages/auth/Signup"
 
 const App = () => {
   const themeContext = useContext(ThemeContext)
@@ -18,9 +19,13 @@ const App = () => {
         <button className="btn btn-accent" onClick={toggleTheme}>
           {theme === "light" ? "Dark mode" : "Light mode"}
         </button>
+        <button className="btn btn-primary ml-4">
+          <Link to='/auth/signup'>S'Inscrire</Link>
+        </button>
       </div>
       <Routes>
-        <Route path="/" element={ <Home/>} />
+        <Route path="/" element={<Home />} />
+        <Route path="/auth/signup" element={<Signup />} />
       </Routes>
     </div>
   )
