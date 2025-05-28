@@ -1,32 +1,28 @@
-import type { ArticleProps } from "../context/articleContext/ArticleContext"
+
+import type { ArticleProps } from "../types/CardTypes"
 import CardImage from "./CardImage"
 
 
 
-// import { ArticleProps } from '../context/articleContext/ArticleContext'
 
-const Card = ({cardItems}: {cardItems: ArticleProps[]}) => {
+const Card = ({cardItems}: {cardItems: ArticleProps}) => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4">
-      {cardItems.map((item, index) => (
-        <div key={index} className="flex flex-col w-[150px] h-[300px] rounded-lg shadow-lg transition hover:scale-105 duration-75">
-          <div className="w-[150px] h-[150px] transition hover:scale-75">
-            <CardImage image={item.image} />
-          </div>
-          <div className="flex gap-2">
-            <h2>{item.name}</h2>
-            <p>{item.price}</p>
-          </div>
-          <div>
-            <p>{item.details}</p>
-          </div>
-          <div className="flex flex-col">
-              <h3>{item.category}</h3>
-              <p>{item.stock}</p>
-              <p>{item.vendor.name}</p>
-          </div>
-        </div>
-      ))}
+    <div className="flex flex-col justify-center items-center w-[300px]  gap-2 mb-4 rounded-2xl shadow-lg transition hover:scale-105 duration-75">
+      <div className="w-full h-full transition hover:scale-105">
+        <CardImage image={cardItems.image} />
+      </div>
+      <div className="flex gap-2 p-4">
+        <h2>{cardItems.name}</h2>
+        <p>{cardItems.price}</p>
+      </div>
+      <div>
+        <p>{cardItems.details}</p>
+      </div>
+      <div className="flex flex-col">
+        <h3>{cardItems.category}</h3>
+        <p>{cardItems.stock}</p>
+        <p>{cardItems.vendor.name}</p>
+      </div>
     </div>
   )
 }
