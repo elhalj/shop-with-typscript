@@ -26,7 +26,7 @@ export const UseCardStore = create<CardStore>((set) => ({
   getArticles: async () => {
     set({ isLoading: true });
     try {
-      const res = await fetch("http://localhost:5001/api/article", {
+      const res = await fetch("http://localhost:5001/api/article/get", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

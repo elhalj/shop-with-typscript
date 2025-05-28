@@ -1,54 +1,79 @@
-# React + TypeScript + Vite
+# E-Commerce Moderne avec React et TypeScript
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Une plateforme e-commerce moderne construite avec React, TypeScript et Vite, intégrant des fonctionnalités avancées comme un chatbot intelligent et une expérience utilisateur optimisée.
 
-Currently, two official plugins are available:
+## 🌟 Fonctionnalités
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Implémentées
+- Interface utilisateur moderne et responsive
+- Gestion d'état avec Zustand
+- Système de thème dynamique
+- Gestion des articles avec API REST
+- Authentification utilisateur
+- Affichage des produits en grid layout adaptatif
 
-## Expanding the ESLint configuration
+### À venir
+- 🤖 Chatbot intelligent pour l'assistance client
+- 🔍 Recherche avancée avec filtres
+- 🛒 Panier d'achat en temps réel
+- 💳 Système de paiement sécurisé
+- 👤 Profils utilisateurs personnalisés
+- 📱 Application mobile (PWA)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠 Stack Technique
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- **Frontend:**
+  - React avec TypeScript
+  - Vite pour le build
+  - TailwindCSS pour le styling
+  - Zustand pour la gestion d'état
+
+- **Architecture:**
+  - Structure modulaire
+  - Contexts pour les thèmes et l'authentification
+  - Stores pour la gestion des données
+  - Types stricts avec TypeScript
+
+## 🚀 Pour Commencer
+
+1. Cloner le projet
+```bash
+git clone [votre-repo]
+cd shop-with-typescript
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Installer les dépendances
+```bash
+pnpm install
+```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+3. Lancer le serveur de développement
+```bash
+pnpm run dev
+```
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
+## 📁 Structure du Projet
+
+```
+src/
+├── assets/         # Ressources statiques
+├── components/     # Composants réutilisables
+├── context/        # Contexts React
+│   ├── article/    # Gestion des articles
+│   ├── theme/      # Gestion du thème
+│   └── user/       # Gestion utilisateur
+├── pages/          # Pages de l'application
+├── store/          # Stores Zustand
+└── types/          # Types TypeScript
+```
+
+## 🔜 Prochaines Étapes
+
+- Intégration du chatbot avec IA
+- Système de recommandations
+- Analytics en temps réel
+- Optimisation des performances
+- Tests automatisés
   },
 })
 ```

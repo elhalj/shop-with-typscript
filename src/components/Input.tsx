@@ -49,7 +49,7 @@ const Input = ({
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 setFormData({ ...formData, [field.name]: e.target.value })
               }
-              className="p-2 bg-accent border-base-300 rounded-lg outline-none"
+              className="p-2 bg-base-300 border-base-300 rounded-lg outline-none"
             />
           </label>
         );
