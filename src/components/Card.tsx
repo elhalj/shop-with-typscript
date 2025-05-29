@@ -1,4 +1,5 @@
 
+import { Link } from "react-router-dom"
 import type { ArticleProps } from "../types/CardTypes"
 import CardImage from "./CardImage"
 
@@ -22,6 +23,7 @@ const Card = ({cardItems}: {cardItems: ArticleProps}) => {
         <h3>{cardItems.category}</h3>
         <p>{cardItems.stock}</p>
         <p>{cardItems.vendor.name}</p>
+        <Link to={`/catalogue/categorie/${cardItems.name}`}><p>Details</p></Link>
       </div>
     </div>
   )
