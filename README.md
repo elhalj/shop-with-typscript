@@ -38,7 +38,7 @@ Une plateforme e-commerce moderne construite avec React, TypeScript et Vite, int
 
 1. Cloner le projet
 ```bash
-git clone [votre-repo]
+git clone [[votre-repo]](https://github.com/elhalj/shop-with-typscript.git)
 cd shop-with-typescript
 ```
 
