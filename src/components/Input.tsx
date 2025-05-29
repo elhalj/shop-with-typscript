@@ -62,7 +62,7 @@ const Input = ({
     <div className="container flex flex-col items-center justify-center h-[800px] p-4 mx-auto py-8 bg-transparent">
       <form
         onSubmit={handleSubmitForm}
-        className="container w-[500px] mx-auto p-6 flex flex-col space-x-1 gap-4 justify-center items-center bg-base-100 border-base-300 shadow-2xl rounded-lg text-base-content"
+        className="container w-[500px] mx-auto p-6 flex flex-col space-x-1 gap-4 justify-center items-center bg-base-100 border-base-300 drop-shadow-xl/50  rounded-lg text-base-content"
       >
         {InputFields}
         {error && <div className="text-red-500">{error}</div>}
