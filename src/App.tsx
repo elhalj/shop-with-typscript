@@ -6,6 +6,8 @@ import Header from "./components/Header";
 import { useContext } from "react";
 import { ThemeContext } from "./context";
 import Details from "./pages/articles/Details";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   const themeContext = useContext(ThemeContext);
@@ -26,6 +28,7 @@ const App = () => {
       </Routes>
       {/* footer */}
       <Footer />
+      <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
 };

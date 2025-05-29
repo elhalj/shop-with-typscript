@@ -1,6 +1,8 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { SlBasketLoaded } from "react-icons/sl";
 import { BsFillBasket3Fill } from "react-icons/bs";
+import { FaMoon } from "react-icons/fa";
+import { LuSun } from "react-icons/lu";
 
 type ThemeProps = {
   /**
@@ -21,7 +23,7 @@ const Header = ({ theme, toggleTheme }: ThemeProps) => {
   const location = useLocation();
 
   return (
-    <div data-theme={theme} className="sticky top-4 z-10 my-4">
+    <div data-theme={theme} className="sticky top-4 z-10 my-4 bg-transparent">
       {/* nav */}
       <div className="container mx-auto flex justify-around items-center bg-neutral-300 text-black rounded-lg">
         <div >
@@ -73,7 +75,7 @@ const Header = ({ theme, toggleTheme }: ThemeProps) => {
           <li className="flex flex-row-reverse justify-center items-center">
             <NavLink to="/basket">
               <div className="relative">
-                <SlBasketLoaded size={32} color="darkblue" />
+                <SlBasketLoaded size={32}  />
                 <span className="absolute -top-4 -right-2 bg-red-400 p-1 w-6 h-auto rounded-full">
                   {/* le nombre d'items dans le panier (0 si pas sur la page panier) a changer plus tard */}
                   {location.pathname === "/basket" ? "1" : "0"} 
@@ -82,10 +84,10 @@ const Header = ({ theme, toggleTheme }: ThemeProps) => {
             </NavLink>
 
             <div className="container mx-auto p-4">
-              <button className="btn btn-accent uppercase" onClick={toggleTheme}>
-                {theme === "light" ? "Dark mode" : "Light mode"}
-              </button>
-              <button className="btn btn-accent ml-4 uppercase">
+              <div className="btn  rounded-full transition-all duration-500 uppercase drop-shadow-xl/25" onClick={toggleTheme}>
+                {theme === "light" ? (<FaMoon size={22}/>) : (<LuSun size={22} color="yellow"/>)}
+              </div>
+              <button className="btn  ml-4 uppercase drop-shadow-xl/25">
                 <Link to="/auth/signup">S'Inscrire</Link>
               </button>
             </div>

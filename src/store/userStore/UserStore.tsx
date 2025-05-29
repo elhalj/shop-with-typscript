@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import type { UserData } from "../../types/userTypes";
+import { toast } from 'react-toastify';
 
 type UserStore = {  
   user: UserData | null;
@@ -13,11 +14,13 @@ type UserStore = {
     name: string,
     firstName: string,
     email: string,
+    password: string,
     address: { city: string; municipality: string; street: string }
   ) => Promise<void>;
   logout: () => void;
     updateProfile: (data: Partial<UserData>) => Promise<void>;
-    checkUser: (data: UserData) => Promise<void>;
+  checkUser: () => Promise<void>;
+  resetError: () => void;
 };
 
 export const UseUserStore = create<UserStore>((set, get) => ({
@@ -26,7 +29,7 @@ export const UseUserStore = create<UserStore>((set, get) => ({
   isSignUp: false,
   error: null,
   token: localStorage.getItem('token'),
-  isAuthenticated: !!get().token,
+  isAuthenticated: !!localStorage.getItem('token'),
 
     login: async (email: string, password: string) => {
         set({ isLogin: true });
@@ -36,12 +39,17 @@ export const UseUserStore = create<UserStore>((set, get) => ({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-      const data = await response.json();
+      const data: { token: string; data: UserData; error?: { message: string } } = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error?.message || 'Identifiants incorrects');
+      }
       set({ token: data.token, user: data.data, isAuthenticated: true });
       localStorage.setItem("token", data.token);
+      toast.success('Connexion réussie ! Bienvenue !');
     } catch (error) {
-        const typeError = error as Error
+      const typeError = error as Error;
       set({ error: typeError.message });
+      toast.error(typeError.message);
     } finally {
         set({ isSignUp: false });
     }
@@ -51,6 +59,7 @@ export const UseUserStore = create<UserStore>((set, get) => ({
     name: string,
     firstName: string,
     email: string,
+    password: string,
     address: { city: string; municipality: string; street: string }
   ) => {
       set({ isSignUp: true });
@@ -58,14 +67,19 @@ export const UseUserStore = create<UserStore>((set, get) => ({
       const response = await fetch("http://localhost:5001/api/user/signUp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, firstName, email, address }),
+        body: JSON.stringify({ name, firstName, email,password, address }),
       });
-      const data = await response.json();
+      const data: { token: string; data: UserData; error?: { message: string } } = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error?.message || 'Une erreur est survenue');
+      }
       set({ token: data.token, user: data.data, isAuthenticated: true });
       localStorage.setItem("token", data.token);
+      toast.success('Inscription réussie ! Bienvenue !');
     } catch (error) {
-       const typeError = error as Error
+      const typeError = error as Error;
       set({ error: typeError.message });
+      toast.error(typeError.message);
     } finally {
         set({ isSignUp: false });
     }
@@ -94,15 +108,14 @@ export const UseUserStore = create<UserStore>((set, get) => ({
     }
   },
 
-  checkUser: async (data: UserData) => {
+  checkUser: async () => {
     try {
       const response = await fetch(`http://localhost:5001/api/user/check`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${get().token}`,
           "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
+        }
       });
       const checkedUser = await response.json();
       if (checkedUser.data._id !== get().user?._id) {
@@ -113,4 +126,8 @@ export const UseUserStore = create<UserStore>((set, get) => ({
       set({ error: typeError.message });
     }
   },
+
+  resetError: () => {
+    set({error: null})
+  }
 }));

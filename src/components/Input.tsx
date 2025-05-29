@@ -24,7 +24,8 @@ const Input = ({
   error,
 }: InputProps) => {
   const [formData, setFormData] = useState<Record<string, string>>({
-    ...initialData,
+    ...Object.fromEntries(fields.map((f) => [f.name, ""])),
+    ...initialData
   });
   const [isLoading, setIsLoading] = useState(false);
 
